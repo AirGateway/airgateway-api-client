@@ -11,9 +11,11 @@ import { OrderRemarksPayload, OrderRemarksResponse } from "./types/OrderRemarks"
 import { OfferPricePayload, OfferPriceResponse } from "./types/OfferPrice";
 import { OrderCancelPayload, OrderCancelResponse } from "./types/OrderCancel";
 import { AirDocIssuePayload } from "./types/AirDocIssue";
-import {OrderCreatePayload} from "./types/OrderCreate";
-import {OrderResponse} from "./types/Order";
-import {OrderRetrievePayload} from "./types/OrderRetrieve";
+import { OrderCreatePayload } from "./types/OrderCreate";
+import { OrderResponse } from "./types/Order";
+import { OrderRetrievePayload } from "./types/OrderRetrieve";
+import { OrderChangePayload } from "./types/OrderChange";
+import { PaymentInfoPayload, PaymentInfoResponse } from "./types/PaymentInfo";
 
 export class AirGateway {
     private client: Client;
@@ -263,6 +265,40 @@ export class AirGateway {
             path: "/OrderRetrieve",
             data: payload,
             headers: mode ? { "Ag-OrderRetrieve-Mode": mode } : undefined,
+        });
+    };
+
+    /**
+     * Amends an existing order (PNR).
+     * This endpoint processes changes to the booking and returns the updated order details.
+     *
+     * @param payload - The request payload containing order amendment details.
+     * @returns A response object confirming the order change.
+     *
+     * @see [OrderChange Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderChange%23Post)
+     */
+    public sendOrderChange = async (payload: OrderChangePayload): Promise<OrderResponse> => {
+        return this.client.request<OrderResponse>({
+            method: "POST",
+            path: "/OrderChange",
+            data: payload,
+        });
+    };
+
+    /**
+     * Payment information for a previously created order or a newly initiated booking.
+     * This endpoint processes the payment details, applies any associated services, and finalizes the payment.
+     *
+     * @param payload - The request payload containing payment details, associated services, and order information.
+     * @returns A response object confirming the payment processing.
+     *
+     * @see [PaymentInfo Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/PaymentInfo%23Post)
+     */
+    public sendPaymentInfo = async (payload: PaymentInfoPayload): Promise<PaymentInfoResponse> => {
+        return this.client.request<PaymentInfoResponse>({
+            method: "POST",
+            path: "/PaymentInfo",
+            data: payload,
         });
     };
 }

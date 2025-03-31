@@ -8,8 +8,10 @@ import { OrderRemarksPayload } from "../types/OrderRemarks";
 import { OfferPricePayload } from "../types/OfferPrice";
 import { OrderCancelPayload } from "../types/OrderCancel";
 import { AirDocIssuePayload } from "../types/AirDocIssue";
-import {OrderRetrievePayload} from "../types/OrderRetrieve";
-import {OrderCreatePayload} from "../types/OrderCreate";
+import { OrderRetrievePayload } from "../types/OrderRetrieve";
+import { OrderCreatePayload } from "../types/OrderCreate";
+import { OrderChangePayload } from "../types/OrderChange";
+import { PaymentInfoPayload } from "../types/PaymentInfo";
 
 dotenv.config();
 
@@ -277,8 +279,8 @@ describe("API Integration Tests", () => {
                             issuingCountryCode: "SR",
                             citizenshipCountryCode: "GS",
                             residenceCountryCode: "PS",
-                            token: ""
-                        }
+                            token: "",
+                        },
                     ],
                     passengerType: "ADT",
                     data: {
@@ -286,9 +288,9 @@ describe("API Integration Tests", () => {
                         email: "tatyana-mann@airgateway.net",
                         fqtvInfo: {
                             account: {
-                                number: ""
+                                number: "",
                             },
-                            airlineID: ""
+                            airlineID: "",
                         },
                         title: "MR",
                         gender: "Female",
@@ -300,18 +302,18 @@ describe("API Integration Tests", () => {
                             countryCode: "ES",
                             cityName: "Rosemead",
                             postalCode: "81705-9276",
-                            street: "Rau Stream"
+                            street: "Rau Stream",
                         },
                     },
-                    travelerReference: "ADT0"
-                }
+                    travelerReference: "ADT0",
+                },
             ],
             corporateID: "",
             loyaltyProgramAccount: "",
             metas: {},
             payment: {
-                method: "agencyCash"
-            }
+                method: "agencyCash",
+            },
         };
 
         try {
@@ -356,6 +358,89 @@ describe("API Integration Tests", () => {
             expect(result).toBeDefined();
         } catch (error) {
             console.error("Error retrieving order in airline mode:", error);
+            throw error;
+        }
+    });
+
+    test("should change an order successfully", async () => {
+        const payload: OrderChangePayload = {
+            id: "AGW-B7Z6BLXLYM",
+            payment: {
+                method: "agencyCash",
+            },
+            services: [
+                {
+                    type: "service",
+                    serviceID: "SRV6",
+                    segmentReference: "SEG1 SEG7",
+                    travelerReference: "PAX1",
+                    quantity: 1,
+                    action: "Create",
+                },
+            ],
+            passengers: [
+                {
+                    data: {
+                        address: {
+                            cityName: "",
+                            countryCode: "",
+                            postalCode: "",
+                            street: "",
+                        },
+                        birthdate: "1998-09-27",
+                        email: "ZARIA-WINDLER@AIRGATEWAY.NET",
+                        gender: "Female",
+                        name: "ZARIA",
+                        phone: "34910541061",
+                        surname: "WINDLER",
+                        title: "MS",
+                    },
+                    infantReference: "",
+                    passengerType: "ADT",
+                    travelerReference: "PAX1",
+                },
+            ],
+        };
+
+        try {
+            const result = await airGateway.sendOrderChange(payload);
+            console.log("OrderChange result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error changing the order:", error);
+            throw error;
+        }
+    });
+
+    test("should process payment info successfully", async () => {
+        const payload: PaymentInfoPayload = {
+            payment: {
+                method: "agencyCash",
+            },
+            type: "pay_ancillaries_on_orderchange",
+            id: "AGW-B7Z6BLXLYM",
+            services: [
+                {
+                    type: "service",
+                    serviceID: "SRV3",
+                    segmentReference: "SEG1 SEG7",
+                    travelerReference: "PAX1",
+                    quantity: 1,
+                    action: "Create",
+                },
+            ],
+        };
+
+        try {
+            const result = await airGateway.sendPaymentInfo(payload);
+            console.log("PaymentInfo result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error processing payment info:", error);
             throw error;
         }
     });

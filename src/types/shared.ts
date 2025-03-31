@@ -21,7 +21,7 @@ export interface Passenger {
     /**
      * List of document associated with the passenger.
      */
-    documents: Document[];
+    documents?: Document[];
 
     /**
      * Infant reference (if any).
@@ -79,7 +79,7 @@ export interface PassengerData {
     /**
      * Frequent traveler information.
      */
-    fqtvInfo: FQTVInfo;
+    fqtvInfo?: FQTVInfo;
 
     /**
      * Gender of the passenger.
@@ -164,7 +164,7 @@ export interface Address {
      *
      * @example "addressAtDestination"
      */
-    label: string;
+    label?: string;
 
     /**
      * Postal code for the address.
@@ -930,7 +930,7 @@ export interface ServiceRequest {
      *
      * @example "AF"
      */
-    owner: string;
+    owner?: string;
 
     /**
      * The quantity of the requested service.

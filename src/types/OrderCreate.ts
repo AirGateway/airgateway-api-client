@@ -1,4 +1,4 @@
-import {Metadata, OrderCreateRemarks, Passenger, Payment, Qualifier} from "./shared";
+import { Metadata, OrderCreateRemarks, Passenger, Payment, Qualifier } from "./shared";
 
 /**
  * Represents the request payload for the Order Create endpoint.

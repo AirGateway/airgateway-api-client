@@ -1,6 +1,4 @@
-import {
-    Payment
-} from "./shared";
+import { Payment } from "./shared";
 
 /**
  * Represents the request payload for the AirDocIssue endpoint.
@@ -17,5 +15,3 @@ export interface AirDocIssuePayload {
      */
     payment: Payment;
 }
-
-
