@@ -3405,3 +3405,109 @@ export interface AncillariesToRebook {
      */
     rebook: boolean;
 }
+
+/**
+ * Represents an origin-destination pair in a shopping search scenario.
+ */
+export interface OriginDestinationASRQ {
+    /**
+     * Arrival details of the flight segment.
+     */
+    arrival: DepartureArrivalASRQ;
+
+    /**
+     * Departure details of the flight segment.
+     */
+    departure: DepartureArrivalASRQ;
+
+    /**
+     * List of flight numbers to not filter out.
+     */
+    flightNumbers?: string[];
+
+    /**
+     * Indicator for whether the origin-destination should be retained in the reshop process.
+     * @example "keep"
+     * Enum: ["keep", ""]
+     */
+    type?: string;
+}
+
+/**
+ * Represents the departure or arrival details of a flight segment.
+ */
+export interface DepartureArrivalASRQ {
+    /**
+     * Departure or arrival airport IATA three-letter code.
+     * @example "LHR"
+     */
+    airportCode: string;
+
+    /**
+     * Departure or arrival date in the format YYYY-MM-DD.
+     * @example "2019-10-15"
+     */
+    date: string;
+
+    /**
+     * Departure or arrival time in the format HH:MM.
+     * @example "23:20"
+     */
+    time?: string;
+}
+
+/**
+ * Represents user-defined preferences for the OrderReshop request.
+ */
+export interface Preferences {
+    /**
+     * Cabin preference from PADIS 9873.
+     * 1 - First Class
+     * 2 - Business Class
+     * 3 - Economy Class
+     * 4 - Premium Economy
+     * 5 - Economy/Coach
+     * 6 - Discounted Economy/Coach
+     * 7 - All
+     * @example ["5"]
+     */
+    cabin?: string[];
+
+    /**
+     * Discount preferences for large family or resident codes.
+     */
+    discounts?: DiscountPreferences;
+
+    /**
+     * Specific fare preferences.
+     */
+    fare?: Fare;
+
+    /**
+     * List of fare preferences from PADIS 9910.
+     */
+    fareList?: Fare[];
+
+    /**
+     * Indicates whether only non-stop flights should be searched.
+     * @example true
+     */
+    nonStop?: boolean;
+}
+
+/**
+ * Represents fare details in the reshop request.
+ */
+export interface Fare {
+    /**
+     * Fare code.
+     * @example "70E"
+     */
+    Code: string;
+
+    /**
+     * Fare definition code.
+     * @example "TO"
+     */
+    Definition: string;
+}

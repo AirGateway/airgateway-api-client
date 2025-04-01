@@ -14,6 +14,8 @@ import { OrderChangePayload } from "../types/OrderChange";
 import { PaymentInfoPayload } from "../types/PaymentInfo";
 import { OrderNotificationSeenTogglePayload } from "../types/OrderNotificationToggle";
 import { OrderReshopRepricePayload } from "../types/OrderReshopReprice";
+import { OrderReshopPayload } from "../types/OrderReshop";
+import { OrderReshopRefundPayload } from "../types/OrderReshopRefund";
 
 dotenv.config();
 
@@ -480,6 +482,55 @@ describe("API Integration Tests", () => {
             expect(result).toBeDefined();
         } catch (error) {
             console.error("Error repricing order reshop offer:", error);
+            throw error;
+        }
+    });
+
+    test("should retrieve reshop offers successfully", async () => {
+        const payload: OrderReshopPayload = {
+            id: "AGW-XJ1U44MIA6",
+            originDestinations: [
+                {
+                    departure: {
+                        airportCode: "FRA",
+                        time: "",
+                        date: "2025-06-10",
+                    },
+                    arrival: {
+                        airportCode: "JFK",
+                        date: "2025-06-10",
+                        time: "",
+                    },
+                },
+            ],
+        };
+
+        try {
+            const result = await airGateway.sendOrderReshop(payload);
+            console.log("OrderReshop result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+            expect(result.offers).toBeInstanceOf(Array);
+        } catch (error) {
+            console.error("Error retrieving order reshop offers:", error);
+            throw error;
+        }
+    });
+
+    test("should process order reshop refund successfully", async () => {
+        const payload: OrderReshopRefundPayload = {
+            id: "AGW-JHTE1543KJ",
+        };
+
+        try {
+            const result = await airGateway.sendOrderReshopRefund(payload);
+            console.log("OrderReshopRefund result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error processing order reshop refund:", error);
             throw error;
         }
     });
