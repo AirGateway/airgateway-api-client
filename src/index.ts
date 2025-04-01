@@ -16,6 +16,8 @@ import { OrderResponse } from "./types/Order";
 import { OrderRetrievePayload } from "./types/OrderRetrieve";
 import { OrderChangePayload } from "./types/OrderChange";
 import { PaymentInfoPayload, PaymentInfoResponse } from "./types/PaymentInfo";
+import { OrderNotificationSeenTogglePayload } from "./types/OrderNotificationToggle";
+import { OrderReshopRepricePayload, OrderReshopRepriceResponse } from "./types/OrderReshopReprice";
 
 export class AirGateway {
     private client: Client;
@@ -298,6 +300,44 @@ export class AirGateway {
         return this.client.request<PaymentInfoResponse>({
             method: "POST",
             path: "/PaymentInfo",
+            data: payload,
+        });
+    };
+
+    /**
+     * Toggles the seen status of selected notifications for a given order.
+     * This endpoint updates the notification status and returns the updated order view.
+     *
+     * @param payload - The request payload containing the order ID and notifications to update.
+     * @returns A response object with the updated order details.
+     *
+     * @see [OrderNotificationSeenToggle Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderNotificationSeenToggle%23Post)
+     */
+    public sendOrderNotificationSeenToggle = async (
+        payload: OrderNotificationSeenTogglePayload
+    ): Promise<OrderResponse> => {
+        return this.client.request<OrderResponse>({
+            method: "POST",
+            path: "/OrderNotificationSeenToggle",
+            data: payload,
+        });
+    };
+
+    /**
+     * Retrieves the price for a selected OrderReshop offer.
+     * This endpoint processes the reshop request and returns the updated pricing details.
+     *
+     * @param payload - The request payload containing the OrderReshop offer ID and related details.
+     * @returns A response object with the updated pricing information.
+     *
+     * @see [OrderReshopReprice Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderReshopReprice%23Post)
+     */
+    public sendOrderReshopReprice = async (
+        payload: OrderReshopRepricePayload
+    ): Promise<OrderReshopRepriceResponse> => {
+        return this.client.request<OrderReshopRepriceResponse>({
+            method: "POST",
+            path: "/OrderReshopReprice",
             data: payload,
         });
     };

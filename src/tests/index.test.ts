@@ -12,6 +12,8 @@ import { OrderRetrievePayload } from "../types/OrderRetrieve";
 import { OrderCreatePayload } from "../types/OrderCreate";
 import { OrderChangePayload } from "../types/OrderChange";
 import { PaymentInfoPayload } from "../types/PaymentInfo";
+import { OrderNotificationSeenTogglePayload } from "../types/OrderNotificationToggle";
+import { OrderReshopRepricePayload } from "../types/OrderReshopReprice";
 
 dotenv.config();
 
@@ -441,6 +443,43 @@ describe("API Integration Tests", () => {
             expect(result).toBeDefined();
         } catch (error) {
             console.error("Error processing payment info:", error);
+            throw error;
+        }
+    });
+
+    test("should toggle order notification seen status successfully", async () => {
+        const payload: OrderNotificationSeenTogglePayload = {
+            id: "AGW-JHTE1543KJ",
+            notificationIds: [3774],
+        };
+
+        try {
+            const result = await airGateway.sendOrderNotificationSeenToggle(payload);
+            console.log("OrderNotificationToggle result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error toggling order notification status:", error);
+            throw error;
+        }
+    });
+
+    test("should reprice an order reshop offer successfully", async () => {
+        const payload: OrderReshopRepricePayload = {
+            id: "AGW-PJ5W2GAOCR",
+            // "date": "2025-04-01",
+            offerID: "OFFER-JUZ9TC8HA69GUBV1OWVNAGIAEYNYDNAMMW9R75J6U2EFKR736SNHYLXC8CXW861I",
+        };
+
+        try {
+            const result = await airGateway.sendOrderReshopReprice(payload);
+            console.log("OrderReshopReprice result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error repricing order reshop offer:", error);
             throw error;
         }
     });

@@ -3389,3 +3389,19 @@ export interface SeatLocation {
      */
     row: number;
 }
+
+/**
+ * Represents an ancillary item that needs to be rebooked for a specific flight segment.
+ */
+export interface AncillariesToRebook {
+    /**
+     * The flight key associated with the ancillary item.
+     */
+    flightKey: string;
+
+    /**
+     * Indicates whether the ancillary item should be rebooked.
+     * @example true
+     */
+    rebook: boolean;
+}
