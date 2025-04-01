@@ -5,7 +5,7 @@ export interface Passenger {
     /**
      * Personal information of the passenger.
      */
-    data: PassengerData;
+    data?: PassengerData;
 
     /**
      * Document information associated with the passenger.
@@ -36,7 +36,7 @@ export interface Passenger {
      *
      * @example "ADT"
      */
-    passengerType: string;
+    passengerType?: string;
 
     /**
      * Traveler reference from the previous response.
@@ -3510,4 +3510,73 @@ export interface Fare {
      * @example "TO"
      */
     Definition: string;
+}
+
+/**
+ * Represents an exit row's position in the aircraft.
+ */
+export interface ExitSeat {
+    /**
+     * Indicates whether the exit is on the left (L) or right (R) side of the plane.
+     *
+     * @example "L"
+     */
+    position: string;
+
+    /**
+     * The row number where the exit is located.
+     *
+     * @example 19
+     */
+    row: number;
+
+    /**
+     * The reference to the flight segment where this exit is positioned.
+     *
+     * @example "XX1007"
+     */
+    segmentID: string;
+}
+
+/**
+ * Represents the seat display layout for a flight segment.
+ */
+export interface SeatDisplay {
+    /**
+     * Seat columns available for selection.
+     *
+     * @example "ABC-DEF"
+     */
+    columns: string;
+
+    /**
+     * The row range available for seat selection.
+     */
+    rows: Rows;
+
+    /**
+     * Reference to the flight segment for which these seats are available.
+     *
+     * @example "IB625120180219"
+     */
+    segment: string;
+}
+
+/**
+ * Represents the range of rows available for seat selection.
+ */
+interface Rows {
+    /**
+     * The first row in the available seat range.
+     *
+     * @example 5
+     */
+    first: number;
+
+    /**
+     * The last row in the available seat range.
+     *
+     * @example 30
+     */
+    last: number;
 }

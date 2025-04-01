@@ -16,6 +16,9 @@ import { OrderNotificationSeenTogglePayload } from "../types/OrderNotificationTo
 import { OrderReshopRepricePayload } from "../types/OrderReshopReprice";
 import { OrderReshopPayload } from "../types/OrderReshop";
 import { OrderReshopRefundPayload } from "../types/OrderReshopRefund";
+import { OrderUpdatePayload } from "../types/OrderUpdate";
+import { SeatAvailabilityPayload } from "../types/SeatAvailability";
+import { ServiceListPayload } from "../types/ServiceList";
 
 dotenv.config();
 
@@ -531,6 +534,102 @@ describe("API Integration Tests", () => {
             expect(result).toBeDefined();
         } catch (error) {
             console.error("Error processing order reshop refund:", error);
+            throw error;
+        }
+    });
+
+    test("should process order update successfully", async () => {
+        const payload: OrderUpdatePayload = {
+            action: "pax_info_correction",
+            id: "AGW-JHTE1543KJ",
+            passengerUpdate: {
+                data: {
+                    address: {
+                        cityName: "",
+                        countryCode: "",
+                        postalCode: "",
+                        street: "",
+                    },
+                    birthdate: "1998-09-27",
+                    email: "ZARIA-WINDLER@AIRGATEWAY.NET",
+                    gender: "Female",
+                    name: "ZARIA",
+                    phone: "34910541061",
+                    surname: "WINDLER",
+                    title: "MS",
+                },
+                infantReference: "",
+                passengerType: "ADT",
+                travelerReference: "PAX1",
+            },
+        };
+
+        try {
+            const result = await airGateway.sendOrderUpdate(payload);
+            console.log("OrderUpdate result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error processing order update:", error);
+            throw error;
+        }
+    });
+
+    test("should retrieve seat availability successfully", async () => {
+        const payload: SeatAvailabilityPayload = {
+            id: "AGW-XJ1U44MIA6",
+            passengers: [
+                {
+                    travelerReference: "T2",
+                },
+                {
+                    travelerReference: "T1",
+                },
+                {
+                    travelerReference: "T2.1",
+                },
+            ],
+        };
+
+        try {
+            const result = await airGateway.sendSeatAvailability(payload);
+            console.log("SeatAvailability result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error retrieving seat availability:", error);
+            throw error;
+        }
+    });
+
+    test("should retrieve service list successfully", async () => {
+        const payload: ServiceListPayload = {
+            id: "AGW-XJ1U44MIA6",
+            passengers: [
+                {
+                    travelerReference: "T2",
+                },
+                {
+                    travelerReference: "T1",
+                },
+                {
+                    travelerReference: "T2.1",
+                },
+            ],
+        };
+
+        try {
+            const result = await airGateway.sendServiceList(payload);
+            console.log("ServiceList result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+            expect(result.services).toBeInstanceOf(Array);
+            expect(result.services.length).toBeGreaterThan(0);
+        } catch (error) {
+            console.error("Error retrieving service list:", error);
             throw error;
         }
     });

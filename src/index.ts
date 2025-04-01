@@ -20,6 +20,9 @@ import { OrderNotificationSeenTogglePayload } from "./types/OrderNotificationTog
 import { OrderReshopRepricePayload, OrderReshopRepriceResponse } from "./types/OrderReshopReprice";
 import { OrderReshopPayload, OrderReshopResponse } from "./types/OrderReshop";
 import { OrderReshopRefundPayload, OrderReshopRefundResponse } from "./types/OrderReshopRefund";
+import { OrderUpdatePayload } from "./types/OrderUpdate";
+import { SeatAvailabilityPayload, SeatAvailabilityResponse } from "./types/SeatAvailability";
+import { ServiceListPayload, ServiceListResponse } from "./types/ServiceList";
 
 export class AirGateway {
     private client: Client;
@@ -376,6 +379,59 @@ export class AirGateway {
         return this.client.request<OrderReshopRefundResponse>({
             method: "POST",
             path: "/OrderReshopRefund",
+            data: payload,
+        });
+    };
+
+    /**
+     * Updates an existing order with amended passenger details.
+     * This endpoint modifies the order and returns the updated order details.
+     *
+     * @param payload - The request payload containing the order ID and passenger updates.
+     * @returns A response object with the updated order details.
+     *
+     * @see [OrderUpdate Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderUpdate%23Post)
+     */
+    public sendOrderUpdate = async (payload: OrderUpdatePayload): Promise<OrderResponse> => {
+        return this.client.request<OrderResponse>({
+            method: "POST",
+            path: "/OrderUpdate",
+            data: payload,
+        });
+    };
+
+    /**
+     * Retrieves seat availability for a given order.
+     * This endpoint returns seat locations, prices, and restrictions (e.g., infant/adult only).
+     *
+     * @param payload - The request payload containing the order ID.
+     * @returns A response object with seat availability details.
+     *
+     * @see [SeatAvailability Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/SeatAvailability%23Post)
+     */
+    public sendSeatAvailability = async (
+        payload: SeatAvailabilityPayload
+    ): Promise<SeatAvailabilityResponse> => {
+        return this.client.request<SeatAvailabilityResponse>({
+            method: "POST",
+            path: "/SeatAvailability",
+            data: payload,
+        });
+    };
+
+    /**
+     * Retrieves a list of services available for an existing order.
+     * This endpoint provides details on additional services such as extra baggage, seat upgrades, and in-flight services.
+     *
+     * @param payload - The request payload containing the order ID.
+     * @returns A response object with available services for the given order.
+     *
+     * @see [ServiceList Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/ServiceList%23Post)
+     */
+    public sendServiceList = async (payload: ServiceListPayload): Promise<ServiceListResponse> => {
+        return this.client.request<ServiceListResponse>({
+            method: "POST",
+            path: "/ServiceList",
             data: payload,
         });
     };
