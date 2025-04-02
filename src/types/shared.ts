@@ -3411,14 +3411,32 @@ export interface AncillariesToRebook {
  */
 export interface OriginDestinationASRQ {
     /**
+     * Origin airport code.
+     * @example "JFK"
+     */
+    origin?: string;
+
+    /**
+     * Destination airport code.
+     * @example "LHR"
+     */
+    destination?: string;
+
+    /**
+     * Departure date in YYYY-MM-DD format.
+     * @example "2025-06-15"
+     */
+    departureDate?: string;
+
+    /**
      * Arrival details of the flight segment.
      */
-    arrival: DepartureArrivalASRQ;
+    arrival?: DepartureArrivalASRQ;
 
     /**
      * Departure details of the flight segment.
      */
-    departure: DepartureArrivalASRQ;
+    departure?: DepartureArrivalASRQ;
 
     /**
      * List of flight numbers to not filter out.
@@ -3431,6 +3449,12 @@ export interface OriginDestinationASRQ {
      * Enum: ["keep", ""]
      */
     type?: string;
+
+    /**
+     * Name of the terminal for the departure or arrival airport.
+     * @example "Terminal 1"
+     */
+    terminalName?: string;
 }
 
 /**
@@ -3447,13 +3471,19 @@ export interface DepartureArrivalASRQ {
      * Departure or arrival date in the format YYYY-MM-DD.
      * @example "2019-10-15"
      */
-    date: string;
+    date?: string;
 
     /**
      * Departure or arrival time in the format HH:MM.
      * @example "23:20"
      */
     time?: string;
+
+    /**
+     * Name of the terminal for the departure or arrival airport.
+     * @example "Terminal 1"
+     */
+    terminalName?: string;
 }
 
 /**

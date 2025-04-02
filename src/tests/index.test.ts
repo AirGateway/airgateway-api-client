@@ -19,6 +19,7 @@ import { OrderReshopRefundPayload } from "../types/OrderReshopRefund";
 import { OrderUpdatePayload } from "../types/OrderUpdate";
 import { SeatAvailabilityPayload } from "../types/SeatAvailability";
 import { ServiceListPayload } from "../types/ServiceList";
+import { AirShoppingPayload } from "../types/AirShopping";
 
 dotenv.config();
 
@@ -630,6 +631,53 @@ describe("API Integration Tests", () => {
             expect(result.services.length).toBeGreaterThan(0);
         } catch (error) {
             console.error("Error retrieving service list:", error);
+            throw error;
+        }
+    });
+
+    test("should retrieve flight offers successfully", async () => {
+        const payload: AirShoppingPayload = {
+            metadata: {
+                country: "DE",
+                currency: "EUR",
+                locale: "de_DE",
+            },
+            originDestinations: [
+                {
+                    departure: {
+                        airportCode: "FRA",
+                        date: "2025-04-20",
+                        time: "",
+                        terminalName: "",
+                    },
+                    arrival: {
+                        airportCode: "MAD",
+                        time: "",
+                        terminalName: "",
+                    },
+                },
+            ],
+            preferences: {
+                maxStops: [10],
+                cabin: ["7"],
+                checkedBaggageIncluded: false,
+            },
+            passengers: [
+                {
+                    travelerReference: "ADT0",
+                    passengerType: "ADT",
+                },
+            ],
+        };
+
+        try {
+            const result = await airGateway.sendAirShopping(payload, "*", 30, "cheapest_flights");
+            console.log("AirShopping result:", result);
+
+            // Validate the response
+            expect(result).toBeDefined();
+        } catch (error) {
+            console.error("Error retrieving flight offers:", error);
             throw error;
         }
     });

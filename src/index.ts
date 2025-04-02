@@ -23,6 +23,7 @@ import { OrderReshopRefundPayload, OrderReshopRefundResponse } from "./types/Ord
 import { OrderUpdatePayload } from "./types/OrderUpdate";
 import { SeatAvailabilityPayload, SeatAvailabilityResponse } from "./types/SeatAvailability";
 import { ServiceListPayload, ServiceListResponse } from "./types/ServiceList";
+import { AirShoppingPayload, AirShoppingResponse } from "./types/AirShopping";
 
 export class AirGateway {
     private client: Client;
@@ -433,6 +434,47 @@ export class AirGateway {
             method: "POST",
             path: "/ServiceList",
             data: payload,
+        });
+    };
+
+    /**
+     * Retrieves a list of available flight offers based on provided origin, destination, dates, and traveler details.
+     * Supports one-way, round-trip, and multi-city searches.
+     *
+     * This endpoint can return results in real-time JSON streaming if `AG-Connection: keep-alive` is set.
+     * Otherwise, all responses will be aggregated before returning.
+     *
+     * @param payload - The request payload containing search criteria.
+     * @param providers - (Optional) Comma-separated provider IDs or `"*"` for all.
+     * @param requestTimeout - (Optional) Request timeout in seconds.
+     * @param searchMode - (Optional) Defines the search filtering mode.
+     *                     - `"cheapest_flights"`: Returns the cheapest offers per itinerary.
+     *                     - `"cheapest_flights_per_cabin"`: Returns the cheapest offers per itinerary and cabin.
+     *                     - `"combine_same_fares_only"`: Filters offers using the same fare.
+     * @returns A response object containing available flight offers.
+     *
+     * @see [AirShopping Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/AirShopping%23Post)
+     */
+    public sendAirShopping = async (
+        payload: AirShoppingPayload,
+        providers?: string,
+        requestTimeout?: number,
+        searchMode?: "cheapest_flights" | "cheapest_flights_per_cabin" | "combine_same_fares_only"
+    ): Promise<AirShoppingResponse> => {
+        const headers: Record<string, string> = {};
+
+        headers["Ag-Providers"] = providers || "*";
+        headers["Ag-Request-Timeout"] = requestTimeout ? requestTimeout.toString() : "60";
+
+        if (searchMode) {
+            headers["AG-Search-Mode"] = searchMode;
+        }
+
+        return this.client.request<AirShoppingResponse>({
+            method: "POST",
+            path: "/AirShopping",
+            data: payload,
+            headers: Object.keys(headers).length > 0 ? headers : undefined,
         });
     };
 }
