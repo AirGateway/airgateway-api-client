@@ -451,6 +451,12 @@ export class AirGateway {
      *                     - `"cheapest_flights"`: Returns the cheapest offers per itinerary.
      *                     - `"cheapest_flights_per_cabin"`: Returns the cheapest offers per itinerary and cabin.
      *                     - `"combine_same_fares_only"`: Filters offers using the same fare.
+     * @param avoidDisclosures - (Optional) Flag to avoid displaying certain disclosures in the response.
+     *                           - `true`: Avoids disclosures such as taxes, charges, and fees.
+     *                           - `false`: Includes all disclosures (default).
+     * @param keepAlive - (Optional) Flag to maintain a persistent connection for streaming large responses.
+     *                    - `true`: Enables the "keep-alive" connection and returns a streamed response.
+     *                    - `false`: Returns the response in a regular format.
      * @returns A response object containing available flight offers.
      *
      * @see [AirShopping Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/AirShopping%23Post)
@@ -459,7 +465,9 @@ export class AirGateway {
         payload: AirShoppingPayload,
         providers?: string,
         requestTimeout?: number,
-        searchMode?: "cheapest_flights" | "cheapest_flights_per_cabin" | "combine_same_fares_only"
+        searchMode?: "cheapest_flights" | "cheapest_flights_per_cabin" | "combine_same_fares_only" | "",
+        avoidDisclosures?: boolean,
+        keepAlive?: boolean
     ): Promise<AirShoppingResponse> => {
         const headers: Record<string, string> = {};
 
@@ -470,11 +478,20 @@ export class AirGateway {
             headers["AG-Search-Mode"] = searchMode;
         }
 
+        if (avoidDisclosures) {
+            headers["AG-Avoid-Disclosures"] = avoidDisclosures.toString();
+        }
+
+        if (keepAlive) {
+            headers["AG-Connection"] = "keep-alive";
+        }
+
         return this.client.request<AirShoppingResponse>({
             method: "POST",
             path: "/AirShopping",
             data: payload,
             headers: Object.keys(headers).length > 0 ? headers : undefined,
+            keepAlive,
         });
     };
 }

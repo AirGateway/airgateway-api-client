@@ -14,6 +14,7 @@ export interface RequestOptions {
     data?: Record<string, any>;
     params?: Record<string, any>;
     headers?: Record<string, any>;
+    keepAlive?: boolean;
 }
 
 export class Client {
@@ -35,6 +36,7 @@ export class Client {
         data,
         params,
         headers = {},
+        keepAlive,
     }: RequestOptions): Promise<T_Data> => {
         const url = new URL(`${this.basePath}${path}`);
 
@@ -62,6 +64,7 @@ export class Client {
             headers: requestHeaders,
             data,
             params,
+            responseType: keepAlive ? "stream" : "json",
         };
 
         const curlCommand = `curl -X ${method} "${url}" -H "Content-Type: application/json" -H "Authorization: Bearer ${this.token}" -d '${JSON.stringify(data)}'`;
@@ -70,6 +73,11 @@ export class Client {
 
         try {
             const response = await axios(config);
+
+            if (keepAlive && response.data) {
+                return response.data;
+            }
+
             console.log("response.data:", response.data);
 
             return response.data;
