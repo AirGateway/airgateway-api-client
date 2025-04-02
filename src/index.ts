@@ -28,8 +28,8 @@ import { AirShoppingPayload, AirShoppingResponse } from "./types/AirShopping";
 export class AirGateway {
     private client: Client;
 
-    constructor(token: string, basePath: string) {
-        this.client = new Client({ token, basePath });
+    constructor(token: string, basePath: string, agency?: string, apiVersion?: string) {
+        this.client = new Client({ token, basePath, agency, apiVersion });
     }
 
     // Non NDC Methods

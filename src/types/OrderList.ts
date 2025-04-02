@@ -214,7 +214,7 @@ export interface OrderListResponse {
 /**
  * Represents counters for orders, broken down by various statuses.
  */
-export interface OrderCounters {
+interface OrderCounters {
     /**
      * Number of active orders.
      *
@@ -310,7 +310,7 @@ export interface OrderCounters {
 /**
  * Represents an order list item with detailed order information.
  */
-export interface OrderListItem {
+interface OrderListItem {
     /**
      * Account details for the order.
      */

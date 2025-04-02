@@ -34,7 +34,7 @@ export interface OrderReshopResponse {
 /**
  * Represents an individual offer in the OrderReshop response.
  */
-export interface OrderReshopOffer {
+interface OrderReshopOffer {
     /**
      * List of disclosures related to the offer.
      */

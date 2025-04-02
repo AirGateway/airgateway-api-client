@@ -50,7 +50,7 @@ export interface Passenger {
 /**
  * Represents the personal data of a passenger.
  */
-export interface PassengerData {
+interface PassengerData {
     /**
      * Address information of the passenger.
      */
@@ -143,7 +143,7 @@ export interface PassengerData {
 /**
  * Represents an address associated with a passenger.
  */
-export interface Address {
+interface Address {
     /**
      * City name where the address is located.
      *
@@ -184,7 +184,7 @@ export interface Address {
 /**
  * Represents frequent traveler information.
  */
-export interface FQTVInfo {
+interface FQTVInfo {
     /**
      * Frequent traveler account details.
      */
@@ -201,7 +201,7 @@ export interface FQTVInfo {
 /**
  * Represents a frequent traveler account.
  */
-export interface FQTVAccount {
+interface FQTVAccount {
     /**
      * Frequent traveler account number.
      *
@@ -213,7 +213,7 @@ export interface FQTVAccount {
 /**
  * Represents document information for a passenger.
  */
-export interface Document {
+interface Document {
     /**
      * The code (ISO Alpha-2) of the country of the traveler's citizenship.
      *
@@ -275,7 +275,7 @@ export interface Document {
 /**
  * Represents document correction details for a passenger.
  */
-export interface DocumentCorrection {
+interface DocumentCorrection {
     /**
      * List of tokens for documents to be deleted.
      * Only used with the 'documents' action type for OrderUpdate.
@@ -404,7 +404,7 @@ export interface FlightPointData {
 /**
  * Represents the baggage allowance for a flight.
  */
-export interface BaggageAllowance {
+interface BaggageAllowance {
     /**
      * Carry-on baggage available for the flight.
      */
@@ -419,7 +419,7 @@ export interface BaggageAllowance {
 /**
  * Represents an item in the baggage allowance.
  */
-export interface BaggageAllowanceItem {
+interface BaggageAllowanceItem {
     /**
      * Options choose type for baggage.
      * Possible values: "one" (select one of suggested options), "many" (select multiple suggested options).
@@ -450,7 +450,7 @@ export interface BaggageAllowanceItem {
 /**
  * Represents an option for baggage allowance item.
  */
-export interface BaggageAllowanceItemOption {
+interface BaggageAllowanceItemOption {
     /**
      * Description of the baggage allowance item.
      */
@@ -487,7 +487,7 @@ export interface BaggageAllowanceItemOption {
 /**
  * Represents a property associated with baggage allowance, such as weight in different units.
  */
-export interface DisclosureProperty {
+interface DisclosureProperty {
     /**
      * Unit of Measurement (UOM) for the property, e.g., "KG" or "LB".
      *
@@ -551,7 +551,7 @@ export interface FlightSegment {
 /**
  * Detailed information about the flight segment.
  */
-export interface FlightDetail {
+interface FlightDetail {
     /**
      * Class of service information.
      */
@@ -612,7 +612,7 @@ export interface FlightDetail {
 /**
  * Information about a stop location during a flight segment.
  */
-export interface StopLocation {
+interface StopLocation {
     /**
      * The airport code for the stop location.
      *
@@ -680,7 +680,7 @@ export interface StopLocation {
 /**
  * Information about the class of service for the flight.
  */
-export interface ClassOfService {
+interface ClassOfService {
     /**
      * The cabin type for the class of service.
      *
@@ -730,7 +730,7 @@ export interface ClassOfService {
 /**
  * Fare information for the flight segment.
  */
-export interface FlightDetailFare {
+interface FlightDetailFare {
     /**
      * The fare basis code for this class of service.
      *
@@ -777,7 +777,7 @@ export interface FlightDetailFare {
 /**
  * Fare rules for cancelability, changeability, and penalties.
  */
-export interface FareRule {
+interface FareRule {
     /**
      * The fare rule for cancelability.
      *
@@ -849,7 +849,7 @@ export interface FareRule {
 /**
  * Fare rule penalties.
  */
-export interface Penalty {
+interface Penalty {
     /**
      * The list of amounts and their associated values for the penalty.
      */
@@ -873,7 +873,7 @@ export interface Penalty {
 /**
  * The amount and application of the penalty.
  */
-export interface PenaltyAmount {
+interface PenaltyAmount {
     /**
      * The penalty amount.
      *
@@ -987,7 +987,7 @@ export interface ServiceRequest {
 /**
  * Represents the location of a seat in an aircraft.
  */
-export interface SeatLocation {
+interface SeatLocation {
     /**
      * The column of the selected seat.
      *
@@ -1310,7 +1310,7 @@ export interface Disclosure {
 /**
  * Represents a detailed description of a disclosure.
  */
-export interface DisclosureDescription {
+interface DisclosureDescription {
     /**
      * Category of the disclosure.
      *
@@ -1365,7 +1365,7 @@ export interface DisclosureDescription {
 /**
  * Represents media data associated with a disclosure.
  */
-export interface MediaData {
+interface MediaData {
     /**
      * ID of the media resource.
      *
@@ -1522,7 +1522,7 @@ export interface Price {
 /**
  * Represents the detailed price information for a specific offer.
  */
-export interface PriceDetail {
+interface PriceDetail {
     /**
      * The base price without any taxes.
      *
@@ -1580,7 +1580,7 @@ export interface PriceDetail {
 /**
  * Represents the price breakdown for a specific passenger type (ADT, CHD, INF).
  */
-export interface PriceDetailBreakdown {
+interface PriceDetailBreakdown {
     /**
      * The base price (without any taxes).
      *
@@ -1635,7 +1635,7 @@ export interface PriceDetailBreakdown {
 /**
  * Represents a discount applied to the price.
  */
-export interface Discount {
+interface Discount {
     /**
      * Application of the discount.
      */
@@ -1657,7 +1657,7 @@ export interface Discount {
 /**
  * Represents a price detail rate (tax/rate/fee) applied to the price.
  */
-export interface PriceDetailRate {
+interface PriceDetailRate {
     /**
      * Breakdown of the rate (tax/rate/fee).
      */
@@ -1674,7 +1674,7 @@ export interface PriceDetailRate {
 /**
  * Represents the breakdown of a price detail rate.
  */
-export interface PriceDetailRateBreakdown {
+interface PriceDetailRateBreakdown {
     /**
      * The code used for the tax/rate/fee.
      *
@@ -1717,7 +1717,7 @@ export interface OfferPriceRemarks {
 /**
  * Represents an order remark template.
  */
-export interface OrderRemarkTemplate {
+interface OrderRemarkTemplate {
     /**
      * The description of the remark.
      */
@@ -1786,7 +1786,7 @@ export interface SSR {
 /**
  * Represents the booking instructions for a special service request (SSR).
  */
-export interface BookingInstructions {
+interface BookingInstructions {
     /**
      * The description of the booking instructions.
      */
@@ -1829,7 +1829,7 @@ export interface BookingInstructions {
 /**
  * Represents an instruction for a field within the booking instructions.
  */
-export interface Instruction {
+interface Instruction {
     /**
      * The pattern that the customer input should match.
      *
@@ -1934,7 +1934,7 @@ export interface CardSurcharge {
 /**
  * Represents surcharge details for consumer and corporate payments.
  */
-export interface SurchargeDetail {
+interface SurchargeDetail {
     consumer: PriceDetail;
     provider: PriceDetail;
 }
@@ -2172,7 +2172,7 @@ export interface AirlineNotification {
 /**
  * Represents an amendment in an airline notification.
  */
-export interface Amendment {
+interface Amendment {
     /**
      * The code of the notification from the airline.
      */
@@ -2197,7 +2197,7 @@ export interface Amendment {
 /**
  * Represents a warning related to an airline notification.
  */
-export interface Warning {
+interface Warning {
     /**
      * A code from the airline about the warning.
      */
@@ -2257,7 +2257,7 @@ export interface AllowedUpdates {
 /**
  * Represents the types of allowed updates for passenger information.
  */
-export interface UpdateTypesAllowed {
+interface UpdateTypesAllowed {
     /**
      * Indicates whether the update is allowed.
      *
@@ -2318,7 +2318,7 @@ export interface AllowedRequests {
 /**
  * Represents allowed requests that are pending.
  */
-export interface AllowedRequestsPending {
+interface AllowedRequestsPending {
     /**
      * Indicates whether order cancellation is allowed.
      *
@@ -2365,7 +2365,7 @@ export interface AllowedRequestsPending {
 /**
  * Represents allowed requests that have been started.
  */
-export interface AllowedRequestsStarted {
+interface AllowedRequestsStarted {
     AncillariesOnHold: boolean; // @example true
     OrderCancel: boolean; // @example true
     OrderCancelToVoucher: boolean; // @example false
@@ -2382,7 +2382,7 @@ export interface AllowedRequestsStarted {
 /**
  * Represents allowed requests once the order is ticketed.
  */
-export interface AllowedRequestsTicketed {
+interface AllowedRequestsTicketed {
     AncillariesOnHold: boolean; // @example false
     OrderCancel: boolean; // @example false
     OrderCancelToVoucher: boolean; // @example true
@@ -2430,7 +2430,7 @@ export interface BookingReference {
 /**
  * Represents an alternative Passenger Name Record (PNR) used by third parties.
  */
-export interface AlternativePNR {
+interface AlternativePNR {
     /**
      * The value of the PNR.
      *
@@ -2547,7 +2547,7 @@ export interface OrderHistoryItem {
 /**
  * Represents ticket history information.
  */
-export interface TicketHistoryInfo {
+interface TicketHistoryInfo {
     /**
      * The date the ticket was issued in YYYY-MM-DD format.
      *
@@ -2622,7 +2622,7 @@ export interface OrderCreatePayment {
 /**
  * Represents card information for the payment.
  */
-export interface CardInformation {
+interface CardInformation {
     /**
      * The type of the card (e.g., "MA" for MasterCard, "VI" for Visa).
      *
@@ -2807,7 +2807,7 @@ export interface TicketInfo {
 /**
  * Represents a coupon in the ticket.
  */
-export interface TicketCoupon {
+interface TicketCoupon {
     /**
      * The date of service for the coupon.
      * This date indicates when the coupon service will take place.
@@ -2910,7 +2910,7 @@ export interface TicketCoupon {
 /**
  * Represents detailed information about the airline for the coupon's segment.
  */
-export interface TicketCouponAirlineInfo {
+interface TicketCouponAirlineInfo {
     /**
      * Arrival details of the flight segment.
      * Contains airport code, name, city, country code, date, terminal, etc.
@@ -2959,7 +2959,7 @@ export interface TicketCouponAirlineInfo {
 /**
  * Represents the departure and arrival date-time for the flight segment.
  */
-export interface TicketCouponAirlineInfoDepartureArrivalDateTime {
+interface TicketCouponAirlineInfoDepartureArrivalDateTime {
     /**
      * The date of the flight segment's arrival or departure.
      * Format: YYYY-MM-DD
@@ -3043,7 +3043,7 @@ export interface FlightPointData {
 /**
  * Represents the equipment used for the flight segment.
  */
-export interface Equipment {
+interface Equipment {
     /**
      * The aircraft code for the flight segment.
      * This identifies the specific aircraft used.
@@ -3069,7 +3069,7 @@ export interface Equipment {
 /**
  * Represents the marketing carrier for the flight segment.
  */
-export interface MarketingCarrier {
+interface MarketingCarrier {
     /**
      * The two-letter airline ID code.
      * This represents the airline issuing the marketing flight.
@@ -3096,7 +3096,7 @@ export interface MarketingCarrier {
 /**
  * Represents the validity details of a ticket coupon.
  */
-export interface TicketCouponValid {
+interface TicketCouponValid {
     /**
      * The effective date of the coupon.
      * The date when the coupon becomes valid.
@@ -3343,7 +3343,7 @@ export interface Seat {
  * Represents characteristics of a seat.
  * Each characteristic describes a feature or attribute of the seat.
  */
-export interface Characteristics {
+interface Characteristics {
     /**
      * Description of the characteristic.
      * This explains the feature or attribute of the seat.
@@ -3367,27 +3367,6 @@ export interface Characteristics {
      * @example "Left side of aircraft"
      */
     definition: string;
-}
-
-/**
- * Represents the location of a seat in the aircraft.
- */
-export interface SeatLocation {
-    /**
-     * Column of the seat.
-     * This refers to the seat's position in terms of the aircraft's seating arrangement.
-     *
-     * @example "3"
-     */
-    column: string;
-
-    /**
-     * Row of the seat.
-     * This refers to the seat's row in the aircraft's seating arrangement.
-     *
-     * @example 13
-     */
-    row: number;
 }
 
 /**

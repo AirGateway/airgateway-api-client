@@ -4,6 +4,7 @@ import { ErrorResponse } from "./types/Error";
 export interface Config {
     token: string;
     basePath?: string;
+    agency?: string;
     apiVersion?: string;
 }
 
@@ -18,12 +19,14 @@ export interface RequestOptions {
 export class Client {
     private token: string;
     private basePath: string;
-    private apiVersion: string;
+    private agency?: string;
+    private apiVersion?: string;
 
-    constructor({ token, basePath, apiVersion }: Config) {
+    constructor({ token, basePath, agency, apiVersion }: Config) {
         this.token = token;
         this.apiVersion = apiVersion || "1.2";
         this.basePath = `${basePath}/v${this.apiVersion}`;
+        this.agency = agency;
     }
 
     public request = async <T_Data = any>({
@@ -42,20 +45,24 @@ export class Client {
             });
         }
 
+        const requestHeaders: Record<string, string> = {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${this.token}`,
+            Accept: "application/json",
+            ...headers,
+        };
+
+        if (this.agency) {
+            requestHeaders["Ag-Agency"] = this.agency;
+        }
+
         const config: AxiosRequestConfig = {
             method,
             url: url.toString(),
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${this.token}`,
-                Accept: "application/json",
-                ...headers,
-            },
+            headers: requestHeaders,
             data,
             params,
         };
-        console.log("url:", url);
-        console.log("params:", params);
 
         const curlCommand = `curl -X ${method} "${url}" -H "Content-Type: application/json" -H "Authorization: Bearer ${this.token}" -d '${JSON.stringify(data)}'`;
 

@@ -25,6 +25,7 @@ dotenv.config();
 
 const token = process.env.AIRGATEWAY_TOKEN;
 const basePath = process.env.BASE_PATH;
+const agency = process.env.AGENCY;
 
 if (!token) {
     throw new Error("AIRGATEWAY_TOKEN is not set in environment variables");
@@ -35,7 +36,7 @@ if (!basePath) {
 }
 
 // Initialize the AirGateway client
-const airGateway = new AirGateway(token, basePath);
+const airGateway = new AirGateway(token, basePath, agency);
 
 describe("API Integration Tests", () => {
     // Non NDC Methods
