@@ -1,8 +1,12 @@
 {
     "name": "@airgateway/api",
-    "version": "1.0.5",
+    "version": "1.0.14",
     "description": "Javascript client library for the AirGateway API",
     "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AirGateway/airgateway-api-client.git"
+    },
     "type": "module",
     "types": "dist/index.d.ts",
     "files": [

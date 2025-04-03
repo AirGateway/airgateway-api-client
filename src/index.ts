@@ -41,7 +41,7 @@ export class AirGateway {
      *
      * @returns A response object containing the API environment, status, and version.
      *
-     * @see [API Status Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Status)
+     * @see [API Status Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Status)
      */
     public getStatus = async (): Promise<StatusResponse> => {
         return this.client.request<StatusResponse>({
@@ -55,7 +55,7 @@ export class AirGateway {
      *
      * @returns A response object containing an array of provider codes.
      *
-     * @see [Provider List Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Providers/ProviderList)
+     * @see [Provider List Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Providers/ProviderList)
      */
     public getProviderList = async (): Promise<ProviderListResponse> => {
         return this.client.request<ProviderListResponse>({
@@ -69,7 +69,7 @@ export class AirGateway {
      *
      * @returns A response object containing a list of presets, each with various properties like airline, preferences, tax exemptions, and travelers.
      *
-     * @see [Agency Presets Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Agency%20Presets/AgencyPresets%23Get)
+     * @see [Agency Presets Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Agency%20Presets/AgencyPresets%23Get)
      */
     public getAgencyPresets = async (): Promise<AgencyPresetsResponse> => {
         return this.client.request<AgencyPresetsResponse>({
@@ -101,7 +101,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID.
      * @returns A response object containing the download URL of the generated PDF.
      *
-     * @see [Order PDF Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderPDF%23Post)
+     * @see [Order PDF Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderPDF%23Post)
      */
     public sendOrderPDF = async (payload: OrderPDFPayload): Promise<OrderPDFResponse> => {
         return this.client.request<OrderPDFResponse>({
@@ -117,7 +117,7 @@ export class AirGateway {
      * @param payload - The request payload containing the task details, including the event name, order ID, and optional parameters.
      * @returns A response object indicating whether the operation was successful.
      *
-     * @see [Create Task Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Non%20NDC%20Methods/CreateTask%23Post)
+     * @see [Create Task Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Non%20NDC%20Methods/CreateTask%23Post)
      */
     public sendCreateTask = async (payload: CreateTaskPayload): Promise<CreateTaskResponse> => {
         return this.client.request<CreateTaskResponse>({
@@ -133,7 +133,7 @@ export class AirGateway {
      * @param payload - The data to send to the endpoint, which includes the order ID and the comment text.
      * @returns A response object indicating whether the operation was successful.
      *
-     * @see [Order Comments Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderComments%23Post)
+     * @see [Order Comments Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderComments%23Post)
      */
     public sendOrderComments = async (
         payload: OrderCommentsPayload
@@ -151,7 +151,7 @@ export class AirGateway {
      * @param payload - The request payload containing the issuing date range and recipient email addresses.
      * @returns A response object indicating whether the operation was successful.
      *
-     * @see [Order Export Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderExport%23Post)
+     * @see [Order Export Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderExport%23Post)
      */
     public sendOrderExport = async (payload: OrderExportPayload): Promise<OrderExportResponse> => {
         return this.client.request<OrderExportResponse>({
@@ -167,7 +167,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID, remark template, and variables.
      * @returns A response object indicating whether the operation was successful.
      *
-     * @see [Order Remarks Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderRemarks%23Post)
+     * @see [Order Remarks Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/Non%20NDC%20Methods/OrderRemarks%23Post)
      */
     public sendOrderRemarks = async (
         payload: OrderRemarksPayload
@@ -190,7 +190,7 @@ export class AirGateway {
      * @param payload - The request payload containing the necessary offer identifiers.
      * @returns A response object containing detailed offer pricing information.
      *
-     * @see [OfferPrice Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OfferPrice%23Post)
+     * @see [OfferPrice Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OfferPrice%23Post)
      */
     public sendOfferPrice = async (payload: OfferPricePayload): Promise<OfferPriceResponse> => {
         return this.client.request<OfferPriceResponse>({
@@ -207,7 +207,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID and cancellation type.
      * @returns A response object containing details of the canceled order.
      *
-     * @see [OrderCancel Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderCancel%23Post)
+     * @see [OrderCancel Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderCancel%23Post)
      */
     public sendOrderCancel = async (payload: OrderCancelPayload): Promise<OrderCancelResponse> => {
         return this.client.request<OrderCancelResponse>({
@@ -224,7 +224,7 @@ export class AirGateway {
      * @param payload - The request payload containing order and payment details.
      * @returns A response object confirming the ticket issuance.
      *
-     * @see [AirDocIssue Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/AirDocIssue%23Post)
+     * @see [AirDocIssue Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/AirDocIssue%23Post)
      */
     public sendAirDocIssue = async (payload: AirDocIssuePayload): Promise<OrderResponse> => {
         return this.client.request<OrderResponse>({
@@ -241,7 +241,7 @@ export class AirGateway {
      * @param payload - The request payload containing passenger, payment, and booking details.
      * @returns A response object confirming the order creation.
      *
-     * @see [OrderCreate Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderCreate%23Post)
+     * @see [OrderCreate Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderCreate%23Post)
      */
     public sendOrderCreate = async (payload: OrderCreatePayload): Promise<OrderResponse> => {
         return this.client.request<OrderResponse>({
@@ -262,7 +262,7 @@ export class AirGateway {
      *               - `"default"`: Uses the default mode.
      * @returns A response object with order details.
      *
-     * @see [OrderRetrieve Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderRetrieve%23Post)
+     * @see [OrderRetrieve Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderRetrieve%23Post)
      */
     public sendOrderRetrieve = async (
         payload: OrderRetrievePayload,
@@ -283,7 +283,7 @@ export class AirGateway {
      * @param payload - The request payload containing order amendment details.
      * @returns A response object confirming the order change.
      *
-     * @see [OrderChange Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderChange%23Post)
+     * @see [OrderChange Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderChange%23Post)
      */
     public sendOrderChange = async (payload: OrderChangePayload): Promise<OrderResponse> => {
         return this.client.request<OrderResponse>({
@@ -300,7 +300,7 @@ export class AirGateway {
      * @param payload - The request payload containing payment details, associated services, and order information.
      * @returns A response object confirming the payment processing.
      *
-     * @see [PaymentInfo Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/PaymentInfo%23Post)
+     * @see [PaymentInfo Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/PaymentInfo%23Post)
      */
     public sendPaymentInfo = async (payload: PaymentInfoPayload): Promise<PaymentInfoResponse> => {
         return this.client.request<PaymentInfoResponse>({
@@ -317,7 +317,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID and notifications to update.
      * @returns A response object with the updated order details.
      *
-     * @see [OrderNotificationSeenToggle Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderNotificationSeenToggle%23Post)
+     * @see [OrderNotificationSeenToggle Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderNotificationSeenToggle%23Post)
      */
     public sendOrderNotificationSeenToggle = async (
         payload: OrderNotificationSeenTogglePayload
@@ -336,7 +336,7 @@ export class AirGateway {
      * @param payload - The request payload containing the OrderReshop offer ID and related details.
      * @returns A response object with the updated pricing information.
      *
-     * @see [OrderReshopReprice Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderReshopReprice%23Post)
+     * @see [OrderReshopReprice Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderReshopReprice%23Post)
      */
     public sendOrderReshopReprice = async (
         payload: OrderReshopRepricePayload
@@ -355,7 +355,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID and reshop preferences.
      * @returns A response object with the available reshop offers.
      *
-     * @see [OrderReshop Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderReshop%23Post)
+     * @see [OrderReshop Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderReshop%23Post)
      */
     public sendOrderReshop = async (payload: OrderReshopPayload): Promise<OrderReshopResponse> => {
         return this.client.request<OrderReshopResponse>({
@@ -372,7 +372,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID.
      * @returns A response object with refund details.
      *
-     * @see [OrderReshopRefund Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderReshopRefund%23Post)
+     * @see [OrderReshopRefund Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderReshopRefund%23Post)
      */
     public sendOrderReshopRefund = async (
         payload: OrderReshopRefundPayload
@@ -391,7 +391,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID and passenger updates.
      * @returns A response object with the updated order details.
      *
-     * @see [OrderUpdate Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/OrderUpdate%23Post)
+     * @see [OrderUpdate Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/OrderUpdate%23Post)
      */
     public sendOrderUpdate = async (payload: OrderUpdatePayload): Promise<OrderResponse> => {
         return this.client.request<OrderResponse>({
@@ -408,7 +408,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID.
      * @returns A response object with seat availability details.
      *
-     * @see [SeatAvailability Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/SeatAvailability%23Post)
+     * @see [SeatAvailability Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/SeatAvailability%23Post)
      */
     public sendSeatAvailability = async (
         payload: SeatAvailabilityPayload
@@ -427,7 +427,7 @@ export class AirGateway {
      * @param payload - The request payload containing the order ID.
      * @returns A response object with available services for the given order.
      *
-     * @see [ServiceList Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/ServiceList%23Post)
+     * @see [ServiceList Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/ServiceList%23Post)
      */
     public sendServiceList = async (payload: ServiceListPayload): Promise<ServiceListResponse> => {
         return this.client.request<ServiceListResponse>({
@@ -459,16 +459,20 @@ export class AirGateway {
      *                    - `false`: Returns the response in a regular format.
      * @returns A response object containing available flight offers.
      *
-     * @see [AirShopping Endpoint Documentation](https://api.airgateway.net/v1.2/swagger-ui/#/NDC%20Methods/AirShopping%23Post)
+     * @see [AirShopping Endpoint Documentation](https://api.airgateway.com/v1.2/swagger-ui/#/NDC%20Methods/AirShopping%23Post)
      */
     public sendAirShopping = async (
         payload: AirShoppingPayload,
         providers?: string,
         requestTimeout?: number,
-        searchMode?: "cheapest_flights" | "cheapest_flights_per_cabin" | "combine_same_fares_only" | "",
+        searchMode?:
+            | "cheapest_flights"
+            | "cheapest_flights_per_cabin"
+            | "combine_same_fares_only"
+            | "",
         avoidDisclosures?: boolean,
         keepAlive?: boolean
-    ): Promise<AirShoppingResponse> => {
+    ): Promise<AirShoppingResponse | Response> => {
         const headers: Record<string, string> = {};
 
         headers["Ag-Providers"] = providers || "*";
@@ -486,7 +490,7 @@ export class AirGateway {
             headers["AG-Connection"] = "keep-alive";
         }
 
-        return this.client.request<AirShoppingResponse>({
+        return this.client.request<AirShoppingResponse | Response>({
             method: "POST",
             path: "/AirShopping",
             data: payload,

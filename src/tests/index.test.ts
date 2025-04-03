@@ -19,7 +19,7 @@ import { OrderReshopRefundPayload } from "../types/OrderReshopRefund";
 import { OrderUpdatePayload } from "../types/OrderUpdate";
 import { SeatAvailabilityPayload } from "../types/SeatAvailability";
 import { ServiceListPayload } from "../types/ServiceList";
-import { AirShoppingPayload } from "../types/AirShopping";
+import { AirShoppingPayload, AirShoppingResponse } from "../types/AirShopping";
 
 dotenv.config();
 
@@ -46,12 +46,12 @@ describe("API Integration Tests", () => {
     test("should fetch real API status", async () => {
         try {
             const result = await airGateway.getStatus();
-            console.log("Real API Status:", result);
+            // console.log("Real API Status:", result);
 
             expect(result.status).toBeDefined();
             expect(typeof result.status).toBe("string");
         } catch (error) {
-            console.error("Error fetching API status:", error);
+            // console.error("Error fetching API status:", error);
             throw error;
         }
     });
@@ -59,12 +59,12 @@ describe("API Integration Tests", () => {
     test("should fetch provider list", async () => {
         try {
             const result = await airGateway.getProviderList();
-            console.log("Provider List:", result);
+            // console.log("Provider List:", result);
 
             expect(result.providers).toBeDefined();
             expect(Array.isArray(result.providers)).toBe(true);
         } catch (error) {
-            console.error("Error fetching provider list:", error);
+            // console.error("Error fetching provider list:", error);
             throw error;
         }
     });
@@ -72,12 +72,12 @@ describe("API Integration Tests", () => {
     test("should fetch agency presets", async () => {
         try {
             const result = await airGateway.getAgencyPresets();
-            console.log("Agency Presets:", result);
+            // console.log("Agency Presets:", result);
 
             expect(result.presets).toBeDefined();
             expect(Array.isArray(result.presets)).toBe(true);
         } catch (error) {
-            console.error("Error fetching agency presets:", error);
+            // console.error("Error fetching agency presets:", error);
             throw error;
         }
     });
@@ -89,7 +89,7 @@ describe("API Integration Tests", () => {
                 page: "1",
                 pageSize: "10",
             });
-            console.log("Order List:", result);
+            // console.log("Order List:", result);
 
             expect(result.orders).toBeDefined();
             expect(Array.isArray(result.orders)).toBe(true);
@@ -97,7 +97,7 @@ describe("API Integration Tests", () => {
             expect(result.count).toBeDefined();
             expect(typeof result.count).toBe("number");
         } catch (error) {
-            console.error("Error fetching order list:", error);
+            // console.error("Error fetching order list:", error);
             throw error;
         }
     });
@@ -110,14 +110,14 @@ describe("API Integration Tests", () => {
         try {
             const result = await airGateway.sendOrderPDF(payload);
 
-            console.log("OrderPDF Response:", result);
+            // console.log("OrderPDF Response:", result);
 
             expect(result).toBeDefined();
             expect(result.downloadURL).toBeDefined();
             expect(typeof result.downloadURL).toBe("string");
             expect(result.downloadURL).toMatch(/^https?:\/\//);
         } catch (error) {
-            console.error("Error generating Order PDF:", error);
+            // console.error("Error generating Order PDF:", error);
             throw error;
         }
     });
@@ -131,12 +131,12 @@ describe("API Integration Tests", () => {
         try {
             const result = await airGateway.sendCreateTask(payload);
 
-            console.log("CreateTask Response:", result);
+            // console.log("CreateTask Response:", result);
 
             expect(result).toBeDefined();
             expect(result.ok).toBe(true); // Check that the response is successful
         } catch (error) {
-            console.error("Error creating task:", error);
+            // console.error("Error creating task:", error);
             throw error;
         }
     });
@@ -150,12 +150,12 @@ describe("API Integration Tests", () => {
         try {
             const result = await airGateway.sendOrderComments(payload);
 
-            console.log("Order Comments Response:", result);
+            // console.log("Order Comments Response:", result);
 
             expect(result).toBeDefined();
             expect(result.ok).toBe(true); // Check that the response is successful
         } catch (error) {
-            console.error("Error adding order comments:", error);
+            // console.error("Error adding order comments:", error);
             throw error;
         }
     });
@@ -169,12 +169,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderExport(payload);
-            console.log("Order Export result:", result);
+            // console.log("Order Export result:", result);
 
             // Check if the response is successful
             expect(result.ok).toBe(true);
         } catch (error) {
-            console.error("Error exporting order:", error);
+            // console.error("Error exporting order:", error);
             throw error;
         }
     });
@@ -194,12 +194,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderRemarks(payload);
-            console.log("Order Remarks result:", result);
+            // console.log("Order Remarks result:", result);
 
             // Check if the response is successful
             expect(result.ok).toBe(true);
         } catch (error) {
-            console.error("Error submitting order remarks:", error);
+            // console.error("Error submitting order remarks:", error);
             throw error;
         }
     });
@@ -216,14 +216,14 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOfferPrice(payload);
-            console.log("Offer Price result:", result);
+            // console.log("Offer Price result:", result);
 
             // Check if the response is successful and validate expected fields
             expect(result).toBeDefined();
             expect(result.price).toBeDefined(); // Check if price details are included in the response
             expect(result.price.consumer.total).toBeGreaterThan(0); // Validate total price is a positive value
         } catch (error) {
-            console.error("Error retrieving offer price:", error);
+            // console.error("Error retrieving offer price:", error);
             throw error;
         }
     });
@@ -236,7 +236,7 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderCancel(payload);
-            console.log("Order Cancel result:", result);
+            // console.log("Order Cancel result:", result);
 
             // Check if the response is defined and contains expected fields
             expect(result).toBeDefined();
@@ -249,7 +249,7 @@ describe("API Integration Tests", () => {
                 expect(result.warnings.length).toBeGreaterThanOrEqual(0);
             }
         } catch (error) {
-            console.error("Error canceling order:", error);
+            // console.error("Error canceling order:", error);
             throw error;
         }
     });
@@ -264,12 +264,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendAirDocIssue(payload);
-            console.log("AirDocIssue result:", result);
+            // console.log("AirDocIssue result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error issuing air document:", error);
+            // console.error("Error issuing air document:", error);
             throw error;
         }
     });
@@ -327,12 +327,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderCreate(payload);
-            console.log("OrderCreate result:", result);
+            // console.log("OrderCreate result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error creating order:", error);
+            // console.error("Error creating order:", error);
             throw error;
         }
     });
@@ -344,12 +344,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderRetrieve(payload, "cached");
-            console.log("OrderRetrieve result:", result);
+            // console.log("OrderRetrieve result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error retrieving order:", error);
+            // console.error("Error retrieving order:", error);
             throw error;
         }
     });
@@ -361,12 +361,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderRetrieve(payload, "airline");
-            console.log("OrderRetrieve (airline mode) result:", result);
+            // console.log("OrderRetrieve (airline mode) result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error retrieving order in airline mode:", error);
+            // console.error("Error retrieving order in airline mode:", error);
             throw error;
         }
     });
@@ -413,12 +413,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderChange(payload);
-            console.log("OrderChange result:", result);
+            // console.log("OrderChange result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error changing the order:", error);
+            // console.error("Error changing the order:", error);
             throw error;
         }
     });
@@ -444,12 +444,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendPaymentInfo(payload);
-            console.log("PaymentInfo result:", result);
+            // console.log("PaymentInfo result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error processing payment info:", error);
+            // console.error("Error processing payment info:", error);
             throw error;
         }
     });
@@ -462,12 +462,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderNotificationSeenToggle(payload);
-            console.log("OrderNotificationToggle result:", result);
+            // console.log("OrderNotificationToggle result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error toggling order notification status:", error);
+            // console.error("Error toggling order notification status:", error);
             throw error;
         }
     });
@@ -481,12 +481,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderReshopReprice(payload);
-            console.log("OrderReshopReprice result:", result);
+            // console.log("OrderReshopReprice result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error repricing order reshop offer:", error);
+            // console.error("Error repricing order reshop offer:", error);
             throw error;
         }
     });
@@ -512,13 +512,13 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderReshop(payload);
-            console.log("OrderReshop result:", result);
+            // console.log("OrderReshop result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
             expect(result.offers).toBeInstanceOf(Array);
         } catch (error) {
-            console.error("Error retrieving order reshop offers:", error);
+            // console.error("Error retrieving order reshop offers:", error);
             throw error;
         }
     });
@@ -530,12 +530,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderReshopRefund(payload);
-            console.log("OrderReshopRefund result:", result);
+            // console.log("OrderReshopRefund result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error processing order reshop refund:", error);
+            // console.error("Error processing order reshop refund:", error);
             throw error;
         }
     });
@@ -568,12 +568,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendOrderUpdate(payload);
-            console.log("OrderUpdate result:", result);
+            // console.log("OrderUpdate result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error processing order update:", error);
+            // console.error("Error processing order update:", error);
             throw error;
         }
     });
@@ -596,12 +596,12 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendSeatAvailability(payload);
-            console.log("SeatAvailability result:", result);
+            // console.log("SeatAvailability result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error retrieving seat availability:", error);
+            // console.error("Error retrieving seat availability:", error);
             throw error;
         }
     });
@@ -624,14 +624,14 @@ describe("API Integration Tests", () => {
 
         try {
             const result = await airGateway.sendServiceList(payload);
-            console.log("ServiceList result:", result);
+            // console.log("ServiceList result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
             expect(result.services).toBeInstanceOf(Array);
             expect(result.services.length).toBeGreaterThan(0);
         } catch (error) {
-            console.error("Error retrieving service list:", error);
+            // console.error("Error retrieving service list:", error);
             throw error;
         }
     });
@@ -672,13 +672,18 @@ describe("API Integration Tests", () => {
         };
 
         try {
-            const result = await airGateway.sendAirShopping(payload, "*", 30, "cheapest_flights");
-            console.log("AirShopping result:", result);
+            const result = (await airGateway.sendAirShopping(
+                payload,
+                "*",
+                30,
+                "cheapest_flights"
+            )) as AirShoppingResponse;
+            // console.log("AirShopping result:", result);
 
             // Validate the response
             expect(result).toBeDefined();
         } catch (error) {
-            console.error("Error retrieving flight offers:", error);
+            // console.error("Error retrieving flight offers:", error);
             throw error;
         }
     });

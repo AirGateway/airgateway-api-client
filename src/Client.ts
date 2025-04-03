@@ -58,29 +58,35 @@ export class Client {
             requestHeaders["Ag-Agency"] = this.agency;
         }
 
-        const config: AxiosRequestConfig = {
-            method,
-            url: url.toString(),
-            headers: requestHeaders,
-            data,
-            params,
-            responseType: keepAlive ? "stream" : "json",
-        };
+        const fetchConfig: RequestInit = keepAlive
+            ? {
+                  method,
+                  headers: requestHeaders,
+                  body: data ? JSON.stringify(data) : undefined,
+                  mode: "cors",
+                  cache: "no-cache",
+                  signal: new AbortController().signal,
+              }
+            : ({} as RequestInit);
 
-        const curlCommand = `curl -X ${method} "${url}" -H "Content-Type: application/json" -H "Authorization: Bearer ${this.token}" -d '${JSON.stringify(data)}'`;
-
-        console.log("Generated curl command: ", curlCommand);
+        const axiosConfig: AxiosRequestConfig = !keepAlive
+            ? {
+                  method,
+                  url: url.toString(),
+                  headers: requestHeaders,
+                  data,
+                  params,
+                  responseType: "json",
+              }
+            : ({} as AxiosRequestConfig);
 
         try {
-            const response = await axios(config);
-
-            if (keepAlive && response.data) {
+            if (keepAlive) {
+                return (await fetch(url.toString(), fetchConfig)) as T_Data;
+            } else {
+                const response = await axios(axiosConfig);
                 return response.data;
             }
-
-            console.log("response.data:", response.data);
-
-            return response.data;
         } catch (error: any) {
             const errorResponse: ErrorResponse = {
                 group: error?.response?.data?.group || "internal_server_error",
@@ -92,8 +98,6 @@ export class Client {
                 requestID: error?.response?.data?.requestID || "unknown_request_id",
                 sessionID: error?.response?.data?.sessionID || "",
             };
-
-            console.error("API request failed:", errorResponse);
 
             throw errorResponse;
         }
